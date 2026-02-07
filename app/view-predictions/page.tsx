@@ -3,6 +3,10 @@ import { Header } from "@/components/header"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
+// Force dynamic rendering - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getPlayersWithPredictions() {
   const players = await sql`
     SELECT DISTINCT u.id, u.name
