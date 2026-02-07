@@ -13,7 +13,7 @@ async function getPlayersWithPredictions() {
     FROM users u
     INNER JOIN rankings r ON u.id = r.user_id
     WHERE u.is_admin = false
-      AND u.email NOT IN ('test@example.com', 'demo@survivor.app', 'admin@survivor.app')
+      AND COALESCE(u.email, '') NOT IN ('test@example.com', 'demo@survivor.app', 'admin@survivor.app')
       AND u.name NOT ILIKE '%test%'
       AND u.name NOT ILIKE '%demo%'
     ORDER BY u.name ASC
