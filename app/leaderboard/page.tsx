@@ -5,7 +5,7 @@ import { LeaderboardPodium } from "@/components/leaderboard-podium"
 
 async function getLeaderboard() {
   const leaderboard = await sql`
-    SELECT 
+    SELECT
       u.id,
       u.name,
       u.email,
@@ -13,6 +13,10 @@ async function getLeaderboard() {
       COALESCE(s.perfect_matches, 0) as perfect_matches
     FROM users u
     LEFT JOIN scores s ON u.id = s.user_id
+    WHERE u.is_admin = false
+      AND COALESCE(u.email, '') NOT IN ('test@example.com', 'demo@survivor.app', 'admin@survivor.app')
+      AND u.name NOT ILIKE '%test%'
+      AND u.name NOT ILIKE '%demo%'
     ORDER BY s.current_total DESC NULLS LAST, u.name ASC
   `
   return leaderboard.map((user, index) => ({

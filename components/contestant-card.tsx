@@ -78,8 +78,18 @@ export function ContestantCard({
           )}
         >
           {contestant.name}
+          {contestant.age && (
+            <span className="ml-2 text-sm font-normal text-muted-foreground">
+              ({contestant.age})
+            </span>
+          )}
         </h3>
         <p className="text-sm text-muted-foreground">{contestant.profession || contestant.season}</p>
+        {contestant.bio && (
+          <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
+            {contestant.bio}
+          </p>
+        )}
         {isEliminated && contestant.final_rank && (
           <p className="mt-1 text-xs text-muted-foreground">
             Eliminated (Rank #{contestant.final_rank})
