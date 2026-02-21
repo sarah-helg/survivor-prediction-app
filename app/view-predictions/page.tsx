@@ -81,13 +81,19 @@ export default async function ViewPredictionsPage() {
         </div>
 
         <Tabs defaultValue={players[0]?.id.toString()} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 mb-6">
-            {players.map((player) => (
-              <TabsTrigger key={player.id} value={player.id.toString()}>
-                {player.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="mb-6 overflow-x-auto pb-2">
+            <TabsList className="inline-flex w-auto min-w-full">
+              {players.map((player) => (
+                <TabsTrigger
+                  key={player.id}
+                  value={player.id.toString()}
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-muted data-[state=inactive]:text-muted-foreground min-w-[140px] px-6 py-3 text-base font-semibold"
+                >
+                  {player.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
 
           {playersWithRankings.map((player) => (
             <TabsContent key={player.id} value={player.id.toString()}>
