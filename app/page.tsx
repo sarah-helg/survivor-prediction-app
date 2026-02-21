@@ -24,7 +24,13 @@ async function getStats() {
   `
 
   const [userCount] = await sql`
-    SELECT COUNT(*) as total FROM users
+    SELECT COUNT(DISTINCT u.id) as total
+    FROM users u
+    INNER JOIN rankings r ON u.id = r.user_id
+    WHERE u.is_admin = false
+      AND COALESCE(u.email, '') NOT IN ('test@example.com', 'demo@survivor.app', 'admin@survivor.app')
+      AND u.name NOT ILIKE '%test%'
+      AND u.name NOT ILIKE '%demo%'
   `
 
   return {
