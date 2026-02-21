@@ -6,25 +6,17 @@ export function RankingInstructions() {
     {
       icon: GripVertical,
       title: "Drag to Reorder",
-      description: "Click and drag the handle to move contestants up or down",
+      description: "Click and drag the handle to move contestants",
     },
     {
       icon: Trophy,
-      title: "Position 1 = Winner",
-      description:
-        "Position 1 is the Sole Survivor. Position 24 is the first person voted out.",
+      title: "Rank from Winner to First Out",
+      description: "Position 1 = Winner, Position 24 = First Out",
     },
     {
       icon: Lock,
-      title: "One Submission Only",
-      description:
-        "Rankings are locked forever once you submit. Choose wisely!",
-    },
-    {
-      icon: Eye,
-      title: "View All Predictions",
-      description:
-        "After submitting, you can view everyone's predictions on the Predictions page.",
+      title: "Locked After Submission",
+      description: "Rankings cannot be changed once submitted",
     },
   ]
 
@@ -33,7 +25,7 @@ export function RankingInstructions() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-card-foreground">
           <Info className="h-5 w-5 text-primary" />
-          How It Works
+          Quick Guide
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -50,13 +42,6 @@ export function RankingInstructions() {
             </div>
           </div>
         ))}
-
-        <div className="rounded-lg border border-primary/30 bg-primary/5 p-4">
-          <p className="text-sm text-card-foreground">
-            <strong>Important:</strong> Submit your predictions before the Season
-            50 premiere. Once submitted, your rankings are permanently locked.
-          </p>
-        </div>
       </CardContent>
     </Card>
   )

@@ -24,9 +24,7 @@ export default async function RankingsPage() {
             Season 50 Predictions
           </h1>
           <p className="mt-2 text-balance text-muted-foreground">
-            Rank all 24 contestants before the season premiere. Position 1 = Sole
-            Survivor (Winner). Position 24 = First Voted Out. Predictions lock
-            once submitted and cannot be changed.
+            Rank all 24 contestants from Winner (Position 1) to First Out (Position 24). Submit before the season premiere!
           </p>
         </div>
 
