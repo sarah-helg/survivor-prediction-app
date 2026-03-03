@@ -4,6 +4,10 @@ import { ContestantGrid } from "@/components/contestant-grid"
 import { StatsCards } from "@/components/stats-cards"
 import { QuickActions } from "@/components/quick-actions"
 
+// Force dynamic rendering - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getContestants() {
   const contestants = await sql`
     SELECT * FROM contestants 

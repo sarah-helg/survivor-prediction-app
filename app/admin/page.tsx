@@ -2,6 +2,10 @@ import { sql } from "@/lib/db"
 import { Header } from "@/components/header"
 import { AdminGate } from "@/components/admin-gate"
 
+// Force dynamic rendering - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getContestants() {
   const contestants = await sql`
     SELECT * FROM contestants 
