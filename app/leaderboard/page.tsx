@@ -4,6 +4,10 @@ import { LeaderboardTable } from "@/components/leaderboard-table"
 import { LeaderboardPodium } from "@/components/leaderboard-podium"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
+// Force dynamic rendering - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function hasEliminations() {
   const result = await sql`
     SELECT COUNT(*) as count
