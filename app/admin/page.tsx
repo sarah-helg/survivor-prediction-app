@@ -21,19 +21,20 @@ async function getStats() {
     FROM contestants
   `
 
-  const [userStats] = await sql`
-    SELECT COUNT(*) as total_users FROM users WHERE is_admin = false
-  `
-
   const [rankingStats] = await sql`
-    SELECT COUNT(DISTINCT user_id) as users_with_rankings FROM rankings
+    SELECT COUNT(DISTINCT u.id) as users_with_rankings
+    FROM users u
+    INNER JOIN rankings r ON u.id = r.user_id
+    WHERE u.is_admin = false
+      AND COALESCE(u.email, '') NOT IN ('test@example.com', 'demo@survivor.app', 'admin@survivor.app')
+      AND u.name NOT ILIKE '%test%'
+      AND u.name NOT ILIKE '%demo%'
   `
 
   return {
     totalContestants: Number(stats.total_contestants),
     activeContestants: Number(stats.active),
     eliminatedContestants: Number(stats.eliminated),
-    totalUsers: Number(userStats.total_users),
     usersWithRankings: Number(rankingStats.users_with_rankings),
   }
 }

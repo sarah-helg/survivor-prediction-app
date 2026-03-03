@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -27,15 +27,31 @@ export function AdminGate({ contestants, stats }: AdminGateProps) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Check for existing session on mount
+  useEffect(() => {
+    const adminSession = sessionStorage.getItem("survivor_admin_auth")
+    if (adminSession === "authenticated") {
+      setIsAuthenticated(true)
+    }
+    setIsLoading(false)
+  }, [])
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     if (username === "sarah" && password === "sarahsurvivor") {
       setIsAuthenticated(true)
+      sessionStorage.setItem("survivor_admin_auth", "authenticated")
       setError("")
     } else {
       setError("Invalid username or password")
     }
+  }
+
+  // Show nothing while checking session
+  if (isLoading) {
+    return null
   }
 
   if (!isAuthenticated) {
